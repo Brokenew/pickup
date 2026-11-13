@@ -1,0 +1,415 @@
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick Up Coffee | Rediseño Buenavista Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navegación Flotante -->
+    <nav class="navbar glass" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>PICKUP COFFEE</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#temporada">Temporada</a></li>
+                <li><a href="#arma-tu-bebida" class="highlight-link">Arma tu receta</a></li>
+            </ul>
+            <button class="cart-toggle" id="cart-open-btn">
+                🛒 <span class="cart-count" id="cart-counter">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Modal del Carrito de Compras (Multi-paso) -->
+    <div class="cart-modal-overlay" id="cart-modal">
+        <div class="cart-modal-content glass">
+            
+            <!-- PASO 1: Lista del carrito -->
+            <div id="checkout-step-1" class="checkout-step active">
+                <div class="cart-header">
+                    <h2>Tu Pedido</h2>
+                    <button class="close-btn cart-close-btn">&times;</button>
+                </div>
+                <div class="cart-items" id="cart-items-container">
+                    <p class="empty-cart-msg">Tu carrito está vacío. ¡Arma tu bebida!</p>
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Total a pagar:</span>
+                        <span id="cart-total-price">$0.00</span>
+                    </div>
+                    <button id="btn-to-step-2" class="btn-primary full-width">Continuar con el pago</button>
+                </div>
+            </div>
+
+            <!-- PASO 2: Datos del usuario y nombre de la bebida -->
+            <div id="checkout-step-2" class="checkout-step">
+                <div class="cart-header">
+                    <h2>Detalles de Entrega</h2>
+                    <button class="close-btn cart-close-btn">&times;</button>
+                </div>
+                <div class="checkout-form">
+                    <label>Bautiza tu creación (Nombre de tu bebida):</label>
+                    <input type="text" id="order-drink-name" class="glass-input" placeholder="Ej. Elixir de Aime">
+                    
+                    <label>Tu Nombre Completo:</label>
+                    <input type="text" id="order-user-name" class="glass-input" placeholder="¿A nombre de quién?">
+                    
+                    <label>Teléfono o Mesa:</label>
+                    <input type="text" id="order-user-phone" class="glass-input" placeholder="Para avisarte...">
+                    
+                    <button id="btn-submit-order" class="btn-primary full-width pulse-btn" style="margin-top: 20px;">Confirmar y Pagar</button>
+                    <button id="btn-back-to-step-1" class="btn-outline full-width" style="margin-top: 10px;">Volver al carrito</button>
+                </div>
+            </div>
+
+            <!-- PASO 3: Confirmación de orden -->
+            <div id="checkout-step-3" class="checkout-step text-center">
+                <div class="cart-header justify-end">
+                    <button class="close-btn cart-close-btn">&times;</button>
+                </div>
+                <div class="success-icon">✨☕✨</div>
+                <h2>¡Orden Recibida!</h2>
+                <p>Gracias por tu compra, <strong id="ticket-name">---</strong>.</p>
+                <p>Tu bebida <strong id="ticket-drink">---</strong> se está preparando en Buenavista.</p>
+                <div class="time-box glass-light">
+                    <h3>Estará lista en:</h3>
+                    <h1 class="time-highlight">15 Minutos</h1>
+                </div>
+                <button class="btn-primary full-width cart-close-btn" style="margin-top: 30px;">Cerrar y volver al inicio</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Sección Hero (Inicio) -->
+    <header id="inicio" class="hero section-reveal" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center;">
+        <div class="hero-content glass-heavy">
+            <h1 class="hero-title">El café perfecto<br>lo diseñas tú.</h1>
+            <p class="hero-subtitle">Descubre la sucursal Buenavista y pide a domicilio con nuestra nueva experiencia interactiva.</p>
+            <div class="hero-buttons">
+                <a href="#arma-tu-bebida" class="btn-primary">Armar mi bebida</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú Principal Extendido -->
+    <section id="menu" class="menu-section section-reveal compact-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>El Menú Clásico</h2>
+                <p>Nuestras bases estrella. Pídelas directas o modifícalas en tu receta.</p>
+            </div>
+            <div class="menu-grid">
+                <!-- 1 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <!-- CAMBIA LA RUTA DE TU IMAGEN AQUÍ -->
+                        <img src="img/late.jpeg" alt="Latte Clásico">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Latte Clásico</h3>
+                        <span class="price">$55.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Latte Clásico" data-price="55">Agregar</button>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <!-- CAMBIA LA RUTA DE TU IMAGEN AQUÍ -->
+                        <img src="img/matcha.jpg" alt="Matcha Helado">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Matcha Helado</h3>
+                        <span class="price">$70.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Matcha Helado" data-price="70">Agregar</button>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <img src="img/moka.jpg" alt="Frappé Moka">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Frappé Moka</h3>
+                        <span class="price">$65.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Frappé Moka" data-price="65">Agregar</button>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <img src="img/caramel.jpeg" alt="Caramel Macchiato">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Caramel Macchiato</h3>
+                        <span class="price">$60.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Caramel Macchiato" data-price="60">Agregar</button>
+                    </div>
+                </div>
+                <!-- 5 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <img src="img/americano.jpg" alt="Americano Frío">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Americano Frío</h3>
+                        <span class="price">$45.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Americano Frío" data-price="45">Agregar</button>
+                    </div>
+                </div>
+                <!-- 6 -->
+                <div class="menu-card glass-light">
+                    <div class="menu-img">
+                        <img src="img/chai.jpg" alt="Chai Latte Suave">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Chai Latte Suave</h3>
+                        <span class="price">$65.00</span>
+                        <button class="btn-outline add-to-cart-btn" data-name="Chai Latte Suave" data-price="65">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bebidas de Temporada -->
+    <section id="temporada" class="seasonal-section section-reveal">
+        <div class="container glass-heavy seasonal-box">
+            <div class="section-header">
+                <h2 style="color: #c95c2e;">🍂 Sabores de Temporada</h2>
+                <p>Especiales por tiempo limitado. Atrévete a probarlos.</p>
+            </div>
+            <div class="menu-grid seasonal-grid">
+                <div class="menu-card glass-light special-card">
+                    <div class="menu-img">
+                        <img src="img/pumpin.jpg" alt="Pumpkin Spice Latte">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Pumpkin Spice Latte</h3>
+                        <p>El rey del otoño con canela y nuez moscada.</p>
+                        <span class="price">$75.00</span>
+                        <button class="btn-primary add-to-cart-btn" data-name="Pumpkin Spice" data-price="75">¡Lo quiero!</button>
+                    </div>
+                </div>
+                <div class="menu-card glass-light special-card">
+                    <div class="menu-img">
+                        <img src="img/manzana.jpg" alt="Apple Crisp Frappé">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Apple Crisp Frappé</h3>
+                        <p>Manzana caramelizada con crema batida.</p>
+                        <span class="price">$75.00</span>
+                        <button class="btn-primary add-to-cart-btn" data-name="Apple Crisp" data-price="75">¡Lo quiero!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- El Laboratorio Interactvo -->
+    <section id="arma-tu-bebida" class="customizer-section section-reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2>El Laboratorio: Crea tu Bebida</h2>
+                <p>El sistema calibra la receta sola. Cuidamos tu salud: el café tiene un tope sano del 40%, y el azúcar, tapioca y jarabe están equilibrados.</p>
+            </div>
+
+            <div class="customizer-layout">
+                <!-- Panel de Controles -->
+                <div class="sliders-panel glass">
+                    
+                    <!-- TIPO DE BEBIDA (Fría / Caliente) -->
+                    <div class="control-group">
+                        <div class="control-labels">
+                            <span class="emoji">🌡️</span>
+                            <label>Temperatura</label>
+                        </div>
+                        <div class="temp-toggle">
+                            <input type="radio" id="temp-caliente" name="temperatura" value="Caliente" checked>
+                            <label for="temp-caliente" class="temp-btn caliente">Caliente ☕</label>
+                            
+                            <input type="radio" id="temp-fria" name="temperatura" value="Fría">
+                            <label for="temp-fria" class="temp-btn fria">Fría 🧊</label>
+                        </div>
+                    </div>
+
+                    <!-- NIVEL DE HIELO -->
+                    <div class="control-group" id="ice-control" style="display: none; margin-top: 15px; padding: 15px; background: rgba(91,180,216,0.1); border-radius: 10px;">
+                        <div class="control-labels">
+                            <span class="emoji">🧊</span>
+                            <label>Nivel de Hielo</label>
+                            <span class="value" id="val-hielo" style="color: #5bb4d8;">Normal</span>
+                        </div>
+                        <input type="range" id="slider-hielo" class="pro-slider ice-slider" min="0" max="2" value="1" step="1">
+                        <div class="ice-labels" style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 8px; color: var(--color-dark); font-weight: bold;">
+                            <span>Poco</span>
+                            <span>Normal</span>
+                            <span>Mucho</span>
+                        </div>
+                    </div>
+
+                    <hr style="border: 1px dashed var(--glass-border); margin: 25px 0;">
+
+                    <!-- CAFÉ (TOPE 40% POR SALUD) -->
+                    <div class="control-group">
+                        <div class="control-labels">
+                            <span class="emoji">☕</span>
+                            <label>Café Base</label>
+                            <span class="value limit-warn" id="val-cafe">25%</span>
+                        </div>
+                        <input type="range" id="slider-cafe" data-id="cafe" class="pro-slider" min="0" max="40" value="25">
+                    </div>
+
+                    <!-- LECHE Y TIPO DE LECHE -->
+                    <div class="control-group">
+                        <div class="control-labels flex-wrap">
+                            <div class="label-main">
+                                <span class="emoji">🥛</span>
+                                <label>Leche</label>
+                            </div>
+                            <span class="value" id="val-leche">50%</span>
+                            
+                            <select id="tipo-leche" class="glass-select full-width mt-10">
+                                <option value="Entera">Leche Entera (Incluida)</option>
+                                <option value="Deslactosada">Deslactosada (+$5)</option>
+                                <option value="Almendra">Almendra (+$12)</option>
+                                <option value="Avena">Avena (+$12)</option>
+                            </select>
+                        </div>
+                        <input type="range" id="slider-leche" data-id="leche" class="pro-slider" min="0" max="80" value="50">
+                    </div>
+
+                    <!-- JARABE Y SABOR (Cambia color) -->
+                    <div class="control-group">
+                        <div class="control-labels flex-wrap">
+                            <div class="label-main">
+                                <span class="emoji">🍯</span>
+                                <label>Jarabe (Sabor)</label>
+                            </div>
+                            <span class="value limit-warn" id="val-jarabe">10%</span>
+                            
+                            <select id="tipo-jarabe" class="glass-select full-width mt-10">
+                                <option value="Sin sabor">Sin jarabe base</option>
+                                <option value="Vainilla">Vainilla (+$10)</option>
+                                <option value="Matcha">Matcha (+$15)</option>
+                                <option value="Taro">Taro (+$15)</option>
+                                <option value="Pumpkin">Pumpkin (+$15)</option>
+                                <option value="Caramelo">Caramelo (+$10)</option>
+                            </select>
+                        </div>
+                        <input type="range" id="slider-jarabe" data-id="jarabe" class="pro-slider" min="0" max="20" value="10">
+                    </div>
+                    
+                    <!-- TAPIOCA -->
+                    <div class="control-group">
+                        <div class="control-labels">
+                            <span class="emoji">🧋</span>
+                            <label>Tapioca</label>
+                            <span class="value limit-warn" id="val-tapioca">10%</span>
+                        </div>
+                        <input type="range" id="slider-tapioca" data-id="tapioca" class="pro-slider" min="0" max="15" value="10">
+                    </div>
+
+                    <!-- AZÚCAR -->
+                    <div class="control-group">
+                        <div class="control-labels">
+                            <span class="emoji">🧂</span>
+                            <label>Azúcar</label>
+                            <span class="value limit-warn" id="val-azucar">5%</span>
+                        </div>
+                        <input type="range" id="slider-azucar" data-id="azucar" class="pro-slider" min="0" max="10" value="5">
+                    </div>
+
+                    <div class="total-indicator">
+                        <span>Balance Total:</span>
+                        <strong id="total-sum" class="success-text">100%</strong>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho: Vasos con formas de objetos -->
+                <div class="visualizer-panel glass">
+                    <h3>Cristalería en Vivo</h3>
+                    <div class="vessels-container">
+                        
+                        <!-- Cafetera -->
+                        <div class="vessel-wrapper">
+                            <div class="vessel shape-coffeepot">
+                                <div class="liquid liq-cafe" id="liq-cafe" style="height: 25%;"></div>
+                            </div>
+                            <span class="vessel-label">Café</span>
+                        </div>
+                        
+                        <!-- Botella de Leche -->
+                        <div class="vessel-wrapper">
+                            <div class="vessel shape-bottle">
+                                <div class="liquid liq-leche" id="liq-leche" style="height: 50%;"></div>
+                            </div>
+                            <span class="vessel-label">Leche</span>
+                        </div>
+                        
+                        <!-- Dispensador Jarabe -->
+                        <div class="vessel-wrapper">
+                            <div class="vessel shape-dispenser">
+                                <div class="liquid liq-jarabe" id="liq-jarabe" style="height: 10%;"></div>
+                            </div>
+                            <span class="vessel-label">Jarabe</span>
+                        </div>
+                        
+                        <!-- Vaso Tapioca -->
+                        <div class="vessel-wrapper">
+                            <div class="vessel shape-cup">
+                                <div class="liquid liq-tapioca" id="liq-tapioca" style="height: 10%;"></div>
+                            </div>
+                            <span class="vessel-label">Tapioca</span>
+                        </div>
+
+                        <!-- Tarro de Azúcar -->
+                        <div class="vessel-wrapper">
+                            <div class="vessel shape-jar">
+                                <div class="liquid liq-azucar" id="liq-azucar" style="height: 5%;"></div>
+                            </div>
+                            <span class="vessel-label">Azúcar</span>
+                        </div>
+
+                    </div>
+
+                    <div class="custom-ticket">
+                        <div class="ticket-row">
+                            <span>Precio de tu fórmula:</span>
+                            <strong id="dynamic-price">$65.00</strong>
+                        </div>
+                        <button id="add-custom-to-cart" class="btn-primary full-width pulse-btn">Llevar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer UVM -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>PICKUP COFFEE</h2>
+                <p>Sucursal Buenavista.</p>
+            </div>
+            <div class="footer-credits">
+                <h3>Proyecto Etapa 1 & 2</h3>
+                <p>Diseño y Comunicación Gráfica | UVM Campus Reforma</p>
+                <p><strong>Equipo:</strong> Aime Rodríguez Careta & Samuel Iain Aparicio Pérez</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
